@@ -4,18 +4,35 @@ import PropTypes from 'prop-types';
 
 const Game = ({ match }) => {
   const [game, setGame] = useState([]);
-
-  const fetchGame = async () => {
-    const data = await fetch(`https://api.rawg.io/api/games/${match.params.id}`);
-
-    const fGame = await data.json();
-    console.log(fGame);
-    setGame(fGame);
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchGame();
+    fetch(`https://api.rawg.io/api/games/${match.params.id}`)
+      .then(res => res.json())
+      .then(
+        result => {
+          setIsLoaded(true);
+          setGame(result);
+        },
+        error => {
+          setIsLoaded(true);
+          setError(error);
+        },
+      );
   }, []);
+
+  if (error) {
+    return (
+      <div>
+        Error:
+        {error.message}
+      </div>
+    );
+  }
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
