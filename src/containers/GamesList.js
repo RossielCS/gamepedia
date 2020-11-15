@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 // import Game from '../components/Game';
 
 const GamesList = () => {
-  useEffect(() => {
-    // eslint-disable-next-line no-use-before-define
-    fetchGames();
-  }, []);
-
   const [games, setGames] = useState([]);
 
   const fetchGames = async () => {
@@ -17,6 +12,10 @@ const GamesList = () => {
     console.log(fGames);
     setGames(fGames.results);
   };
+
+  useEffect(() => {
+    fetchGames();
+  }, []);
 
   return (
     <div>
