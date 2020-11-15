@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Game from '../components/Game';
 
 const GamesList = () => {
   const [games, setGames] = useState([]);
-
-  const fetchGames = async () => {
-    const data = await fetch('https://api.rawg.io/api/games?page_size=10');
-
-    const fGames = await data.json();
-    console.log(fGames);
-    setGames(fGames.results);
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchGames();
+    fetch('https://api.rawg.io/api/games?page_size=10')
+      .then(res => res.json())
+      .then(
+        result => {
+          setIsLoaded(true);
+          setGames(result.results);
+        },
+        error => {
+          setIsLoaded(true);
+          setError(error);
+        },
+      );
   }, []);
+
+  if (error) {
+    return (
+      <div>
+        Error:
+        {error.message}
+      </div>
+    );
+  }
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
