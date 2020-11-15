@@ -1,5 +1,7 @@
 import React from 'react';
 
-const Game = () => { <p>Game</p>; };
+const Game = () => (
+  <div>Game</div>
+);
 
 export default Game;
