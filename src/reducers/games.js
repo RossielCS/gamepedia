@@ -1,7 +1,9 @@
-const gamesReducer = (state = '', action) => {
+const gamesReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SEARCH_GAME':
-      return action.game;
+    case 'RECEIVE_GAMES_LIST':
+      return [
+        ...action.payload,
+      ];
     default:
       return state;
   }
