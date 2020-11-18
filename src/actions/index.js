@@ -30,4 +30,20 @@ const fetchGamesList = () => dispatch => {
     .catch(error => fecthError(dispatch, error));
 };
 
-export { searchGame, changeFilter, fetchGamesList };
+const fetchCategories = () => dispatch => {
+  fetchData(dispatch);
+  fetch('https://api.rawg.io/api/genres')
+    .then(response => {
+      if (!response.ok) responseNotOk(dispatch);
+      return response.json();
+    })
+    .then(result => dispatch({
+      type: 'RECEIVE_CATEGORIES',
+      payload: result.results,
+    }))
+    .catch(error => fecthError(dispatch, error));
+};
+
+export {
+  searchGame, changeFilter, fetchGamesList, fetchCategories,
+};
