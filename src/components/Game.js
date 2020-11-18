@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchGame } from '../actions';
 
-const Game = ({ match }) => {
-  const [game, setGame] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
+const Game = ({
+  match, item, fetching, error,
+}) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`https://api.rawg.io/api/games/${match.params.id}`)
-      .then(res => res.json())
-      .then(
-        result => {
-          setIsLoaded(true);
-          setGame(result);
-        },
-        error => {
-          setIsLoaded(true);
-          setError(error);
-        },
-      );
-  }, []);
+    dispatch(fetchGame(match));
+  }, [dispatch]);
 
-  if (error) {
-    return (
-      <div>
-        Error:
-        {error.message}
-      </div>
-    );
-  }
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
+  if (fetching) return <div>Loading...</div>;
+  if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
 
   return (
     <div>
-      <h1>{game.name}</h1>
-      <img src={game.background_image} alt={game.name} />
+      <h1>{item.name}</h1>
+      <img src={item.background_image} alt={item.name} />
     </div>
   );
 };
@@ -46,4 +27,4 @@ Game.propTypes = {
   match: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default Game;
+export default connect(mapStateToProps, { fetchGame })(Game);
