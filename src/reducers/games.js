@@ -1,9 +1,15 @@
-const gamesReducer = (state = [], action) => {
+const initialState = {
+  items: [],
+  item: {},
+};
+
+const gamesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVE_GAMES_LIST':
-      return [
-        ...action.payload,
-      ];
+      return {
+        ...state,
+        items: action.payload,
+      };
     default:
       return state;
   }

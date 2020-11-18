@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
 
-const GamesList = () => {
+const GamesList = ({
+  items, filter, fetching, error, fetchGamesList, changeFilter,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,9 +17,25 @@ const GamesList = () => {
   );
 };
 
+GamesList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filter: PropTypes.string.isRequired,
+  fetching: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  fetchGamesList: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = dispatch => ({
   fetchGamesList,
   changeFilter: filter => dispatch(changeFilter(filter)),
 });
 
-export default connect(null, mapDispatchToProps)(GamesList);
+const mapStateToProps = state => ({
+  items: state.games.items,
+  filter: state.filter.filter,
+  fetching: state.fetch.fetching,
+  error: state.fetch.error,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamesList);
