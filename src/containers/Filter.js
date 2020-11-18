@@ -12,8 +12,30 @@ const Filter = ({
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  if (fetching && !categories.length) return <div>Loading...</div>;
+  if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
+
   return (
-    <p>Filter Component</p>
+    <div className="Category-filter">
+      <div>
+        <label htmlFor="filter">
+          <span>FILTER CATEGORIES</span>
+          <select onChange={e => handleFilterChange(e.target.value)}>
+            <option key="All" value="All" defaultValue>All</option>
+            {categories.map(
+              category => (
+                <option
+                  key={category.id}
+                  value={category.name}
+                >
+                  {category.name}
+                </option>
+              ),
+            )}
+          </select>
+        </label>
+      </div>
+    </div>
   );
 };
 

@@ -14,6 +14,8 @@ const GamesList = ({
   const dispatch = useDispatch();
   let filteredGames = [];
 
+  console.log(filter);
+
   useEffect(() => {
     dispatch(fetchGamesList());
   }, [dispatch]);
@@ -26,6 +28,8 @@ const GamesList = ({
   } else {
     filteredGames = items.filter(x => x.genres[0].name === filter);
   }
+
+  console.log(filteredGames);
 
   return (
     <div>
