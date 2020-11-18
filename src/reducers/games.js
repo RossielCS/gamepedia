@@ -10,6 +10,11 @@ const gamesReducer = (state = initialState, action) => {
         ...state,
         items: action.payload,
       };
+    case 'RECEIVE_GAME':
+      return {
+        ...state,
+        item: action.payload,
+      };
     default:
       return state;
   }

@@ -10,6 +10,12 @@ const fetchReducer = (state = initialState, action) => {
         ...state,
         fetching: true,
       };
+    case 'FETCH_ERROR':
+      return {
+        ...state,
+        fetching: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

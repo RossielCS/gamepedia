@@ -27,8 +27,6 @@ const GamesList = ({
     filteredGames = items.filter(x => x.genres[0].name === filter);
   }
 
-  console.log(filteredGames);
-
   return (
     <div>
       <Filter handleFilterChange={handleChangeFilter} />
