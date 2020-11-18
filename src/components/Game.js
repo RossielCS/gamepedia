@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchGame } from '../actions';
 
 const Game = ({
-  match, item, fetching, error,
+  match, item, fetching, error, fetchGame,
 }) => {
   const dispatch = useDispatch();
 
@@ -12,7 +12,7 @@ const Game = ({
     dispatch(fetchGame(match));
   }, [dispatch]);
 
-  if (fetching) return <div>Loading...</div>;
+  if (fetching && !item) return <div>Loading...</div>;
   if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
 
   return (
@@ -24,7 +24,27 @@ const Game = ({
 };
 
 Game.propTypes = {
-  match: PropTypes.objectOf(PropTypes.object).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    background_image: PropTypes.string,
+  }).isRequired,
+  fetching: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  fetchGame: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { fetchGame })(Game);
+const mapDispatchToProps = () => ({
+  fetchGame,
+});
+
+const mapStateToProps = state => ({
+  item: state.games.item,
+  fetching: state.fetch.fetching,
+  error: state.fetch.error,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
