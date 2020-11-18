@@ -1,4 +1,9 @@
-const filtersReducer = (state = 'All', action) => {
+const initialState = {
+  categories: [],
+  filter: 'All',
+};
+
+const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_FILTER':
       return action.filter;
