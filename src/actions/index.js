@@ -2,19 +2,24 @@ const fetchData = dispatch => dispatch({ type: 'FETCH_DATA' });
 const responseNotOk = dispatch => {
   dispatch({ type: 'FETCH_ERROR', payload: 'The data could not be retrieved.' });
 };
-const fecthError = (dispatch, error) => {
+const fetchError = (dispatch, error) => {
   dispatch({ type: 'FETCH_ERROR', payload: error.message });
 };
 
-const searchGame = game => ({
-  type: 'SEARCH_GAME',
-  game,
-});
-
-const changeFilter = filter => ({
-  type: 'CHANGE_FILTER',
-  payload: filter,
-});
+const searchGame = input => dispatch => {
+  const game = encodeURIComponent(input);
+  fetchData(dispatch);
+  fetch(`https://api.rawg.io/api/games?search=${game}`)
+    .then(response => {
+      if (!response.ok) responseNotOk(dispatch);
+      return response.json();
+    })
+    .then(result => dispatch({
+      type: 'SEARCH_GAME',
+      payload: result.results,
+    }))
+    .catch(error => fetchError(dispatch, error));
+};
 
 const fetchGamesList = () => dispatch => {
   fetchData(dispatch);
@@ -27,7 +32,7 @@ const fetchGamesList = () => dispatch => {
       type: 'RECEIVE_GAMES_LIST',
       payload: result.results,
     }))
-    .catch(error => fecthError(dispatch, error));
+    .catch(error => fetchError(dispatch, error));
 };
 
 const fetchCategories = () => dispatch => {
@@ -41,7 +46,7 @@ const fetchCategories = () => dispatch => {
       type: 'RECEIVE_CATEGORIES',
       payload: result.results,
     }))
-    .catch(error => fecthError(dispatch, error));
+    .catch(error => fetchError(dispatch, error));
 };
 
 const fetchGame = match => dispatch => {
@@ -55,8 +60,13 @@ const fetchGame = match => dispatch => {
       type: 'RECEIVE_GAME',
       payload: result,
     }))
-    .catch(error => fecthError(dispatch, error));
+    .catch(error => fetchError(dispatch, error));
 };
+
+const changeFilter = filter => ({
+  type: 'CHANGE_FILTER',
+  payload: filter,
+});
 
 export {
   searchGame, changeFilter, fetchGamesList, fetchCategories, fetchGame,

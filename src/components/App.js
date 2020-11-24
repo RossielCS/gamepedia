@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import GamesList from '../containers/GamesList';
-import Game from './Game';
+import Game from '../containers/Game';
 import Footer from './Footer';
 import '../assets/stylesheet/App.css';
 

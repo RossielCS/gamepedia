@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
-import Filter from './Filter';
+import Filter from '../components/Filter';
 
 const GamesList = ({
   items, filter, fetching, error, fetchGamesList, changeFilter,
