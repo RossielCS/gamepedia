@@ -43,8 +43,8 @@ const mapDispatchToProps = () => ({
 
 const mapStateToProps = state => ({
   item: state.games.item,
-  fetching: state.fetch.fetching,
-  error: state.fetch.error,
+  fetching: state.games.fetching,
+  error: state.games.error,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

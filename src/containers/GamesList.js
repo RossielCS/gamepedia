@@ -8,23 +8,25 @@ import Filter from '../components/Filter';
 const GamesList = ({
   items, filter, fetching, error, fetchGamesList, changeFilter,
 }) => {
-  const handleChangeFilter = filter => {
-    changeFilter(filter);
-  };
   const dispatch = useDispatch();
   let filteredGames = [];
 
+  const handleChangeFilter = filter => {
+    changeFilter(filter);
+  };
+
   useEffect(() => {
     dispatch(fetchGamesList());
-  }, [dispatch]);
+  }, []);
 
-  if (fetching && !items.length) return <div>Loading...</div>;
-  if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
+  if (fetching) return <div>Loading...</div>;
+  if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
 
   if (filter === 'All') {
     filteredGames = items;
   } else {
-    filteredGames = items.filter(x => x.genres[0].name === filter);
+    filteredGames = items.filter(x => x.genres.length);
+    filteredGames = filteredGames.filter(x => x.genres[0].name === filter);
   }
 
   console.log(filteredGames);
@@ -60,8 +62,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   items: state.games.items,
   filter: state.filter.filter,
-  fetching: state.fetch.fetching,
-  error: state.fetch.error,
+  fetching: state.games.fetching,
+  error: state.games.error,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamesList);
