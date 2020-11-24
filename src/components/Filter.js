@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCategories } from '../actions';
+import store from '../store';
+import filterGenres from '../helpers';
 
-const Filter = ({
-  categories, fetching, error, handleFilterChange, fetchCategories,
-}) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  if (fetching && !categories.length) return <div>Loading...</div>;
-  if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
+const Filter = ({ handleFilterChange }) => {
+  let genres = [];
+  const state = useSelector(store => store.games.items.length);
+  if (state) {
+    const items = store.getState();
+    genres = filterGenres(items.games.items);
+  }
 
   return (
     <div className="Category-filter">
@@ -22,7 +19,7 @@ const Filter = ({
           <span>FILTER CATEGORIES</span>
           <select onChange={e => handleFilterChange(e.target.value)}>
             <option key="All" value="All" defaultValue>All</option>
-            {categories.map(
+            {genres.map(
               category => (
                 <option
                   key={category.id}
@@ -40,21 +37,7 @@ const Filter = ({
 };
 
 Filter.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  fetching: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
   handleFilterChange: PropTypes.func.isRequired,
-  fetchCategories: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = () => ({
-  fetchCategories,
-});
-
-const mapStateToProps = state => ({
-  categories: state.filter.categories,
-  fetching: state.fetch.fetching,
-  error: state.fetch.error,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;
