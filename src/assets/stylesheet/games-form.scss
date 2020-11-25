@@ -1,0 +1,42 @@
+.Games-form {
+  form {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0ee;
+
+    input[type=text] {
+      height: 35px;
+      width: 200px;
+      padding-left: 10px;
+      border: 1px solid #d8d7dc;
+      font-family: 'Castoro', serif;
+
+      &::placeholder {
+        color: #d8d7dc;
+      }
+    }
+
+    button {
+      position: relative;
+      height: 35px;
+      width: 50px;
+      border: 1px solid #d8d7dc;
+      border-left: none;
+      background-color: #fff;
+
+      img {
+        position: absolute;
+        width: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+}

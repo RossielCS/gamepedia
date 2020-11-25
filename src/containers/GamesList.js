@@ -36,7 +36,7 @@ const GamesList = ({
   }
 
   return (
-    <div>
+    <div className="Games-list">
       <Filter handleFilterChange={handleChangeFilter} />
       <div>
         {filteredGames.map(x => (
