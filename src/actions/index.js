@@ -6,24 +6,16 @@ const fetchError = (dispatch, error) => {
   dispatch({ type: 'FETCH_ERROR', payload: error.message });
 };
 
-const searchGame = input => dispatch => {
-  const game = encodeURIComponent(input);
-  fetchData(dispatch);
-  fetch(`https://api.rawg.io/api/games?search=${game}`)
-    .then(response => {
-      if (!response.ok) responseNotOk(dispatch);
-      return response.json();
-    })
-    .then(result => dispatch({
-      type: 'SEARCH_GAME',
-      payload: result.results,
-    }))
-    .catch(error => fetchError(dispatch, error));
-};
+const fetchGamesList = match => dispatch => {
+  let api = null;
+  if (match.length) {
+    api = `search=${match}`;
+  } else {
+    api = 'page_size=40';
+  }
 
-const fetchGamesList = () => dispatch => {
   fetchData(dispatch);
-  fetch('https://api.rawg.io/api/games?page_size=10')
+  fetch(`https://api.rawg.io/api/games?${api}`)
     .then(response => {
       if (!response.ok) responseNotOk(dispatch);
       return response.json();
@@ -69,5 +61,5 @@ const changeFilter = filter => ({
 });
 
 export {
-  searchGame, changeFilter, fetchGamesList, fetchCategories, fetchGame,
+  changeFilter, fetchGamesList, fetchCategories, fetchGame,
 };

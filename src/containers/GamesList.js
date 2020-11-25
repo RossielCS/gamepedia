@@ -6,7 +6,7 @@ import { fetchGamesList, changeFilter } from '../actions';
 import Filter from '../components/Filter';
 
 const GamesList = ({
-  items, filter, fetching, error, fetchGamesList, changeFilter,
+  match, items, filter, fetching, error, fetchGamesList, changeFilter,
 }) => {
   const dispatch = useDispatch();
   let filteredGames = [];
@@ -16,7 +16,13 @@ const GamesList = ({
   };
 
   useEffect(() => {
-    dispatch(fetchGamesList());
+    let { query } = match.params;
+    if (query) {
+      query = encodeURIComponent(query);
+    } else {
+      query = {};
+    }
+    dispatch(fetchGamesList(query));
   }, []);
 
   if (fetching) return <div>Loading...</div>;
@@ -28,8 +34,6 @@ const GamesList = ({
     filteredGames = items.filter(x => x.genres.length);
     filteredGames = filteredGames.filter(x => x.genres[0].name === filter);
   }
-
-  console.log(filteredGames);
 
   return (
     <div>
@@ -46,6 +50,9 @@ const GamesList = ({
 };
 
 GamesList.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   filter: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
