@@ -12,6 +12,7 @@ const App = () => (
       <Header />
       <Switch>
         <Route path="/" exact component={GamesList} />
+        <Route path="/search/:query" component={GamesList} />
         <Route path="/games/:id" exact component={Game} />
       </Switch>
       <Footer />

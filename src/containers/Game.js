@@ -12,8 +12,8 @@ const Game = ({
     dispatch(fetchGame(match));
   }, [dispatch]);
 
-  if (fetching && !item) return <div>Loading...</div>;
-  if (error.length !== 0) return <div>{`ERROR: ${error}`}</div>;
+  if (fetching) return <div>Loading...</div>;
+  if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
 
   return (
     <div>
