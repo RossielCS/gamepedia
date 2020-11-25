@@ -9,13 +9,10 @@ const GamesForm = () => {
 
   return (
     <div className="Games-form">
-      <div>
-        <h2>SEARCH</h2>
-        <form action={`/search/${title}`}>
-          <input type="text" id="title" value={title} placeholder="Write game's name..." onChange={handleChange} required />
-          <input type="submit" value="SEARCH" />
-        </form>
-      </div>
+      <form action={`/search/${title}`}>
+        <input type="text" id="title" value={title} placeholder="Write game's name..." onChange={handleChange} required />
+        <input type="submit" value="" />
+      </form>
     </div>
   );
 };

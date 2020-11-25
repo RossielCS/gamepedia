@@ -4,7 +4,7 @@ import Header from './Header';
 import GamesList from '../containers/GamesList';
 import Game from '../containers/Game';
 import Footer from './Footer';
-import '../assets/stylesheet/App.css';
+import '../assets/stylesheet/style.scss';
 
 const App = () => (
   <Router>
