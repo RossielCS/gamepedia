@@ -2,17 +2,11 @@
 @import 'variables';
 @import 'header';
 @import 'games-form';
+@import 'filter';
 @import 'games-list';
 
-body {
-  width: 100%;
-}
-
-.root {
-  min-width: 100vw;
-}
-
 .App {
-  min-width: 1000px;
+  min-width: 1280px;
+  margin: 0 auto;
   text-align: center;
 }

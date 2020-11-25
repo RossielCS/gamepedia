@@ -46,8 +46,8 @@ const GamesList = ({
         {filteredGames.map(x => (
           <article key={x.id}>
             <Link to={`/games/${x.slug}`}>
-              <img src={x.background_image} alt={x.name} />
               <p>{x.name}</p>
+              <img src={x.background_image} alt={x.name} />
             </Link>
           </article>
         ))}
