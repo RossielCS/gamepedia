@@ -27,20 +27,6 @@ const fetchGamesList = match => dispatch => {
     .catch(error => fetchError(dispatch, error));
 };
 
-const fetchCategories = () => dispatch => {
-  fetchData(dispatch);
-  fetch('https://api.rawg.io/api/genres')
-    .then(response => {
-      if (!response.ok) responseNotOk(dispatch);
-      return response.json();
-    })
-    .then(result => dispatch({
-      type: 'RECEIVE_CATEGORIES',
-      payload: result.results,
-    }))
-    .catch(error => fetchError(dispatch, error));
-};
-
 const fetchGame = match => dispatch => {
   fetchData(dispatch);
   fetch(`https://api.rawg.io/api/games/${match.params.id}`)
@@ -61,5 +47,5 @@ const changeFilter = filter => ({
 });
 
 export {
-  changeFilter, fetchGamesList, fetchCategories, fetchGame,
+  changeFilter, fetchGamesList, fetchGame,
 };

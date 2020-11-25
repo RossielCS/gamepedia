@@ -1,6 +1,8 @@
 @import 'variables';
 
 .Games-list {
+  background-color: $terciary-color;
+
   .Filter {
     display: flex;
     justify-content: center;
@@ -26,6 +28,20 @@
         color: #747373;
         font-family: 'Castoro', serif;
         border: 1px solid $secondary-color-darker;
+      }
+    }
+  }
+
+  .games {
+    display: grid;
+    grid-template-columns: 500px 500px;
+
+    article {
+      width: 500px;
+      border: 1px solid #fff;
+
+      img {
+        max-width: 500px;
       }
     }
   }

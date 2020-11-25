@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
+import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
 
 const GamesList = ({
@@ -25,7 +26,7 @@ const GamesList = ({
     dispatch(fetchGamesList(query));
   }, []);
 
-  if (fetching) return <div>Loading...</div>;
+  if (fetching) return <div className="loading">Loading...</div>;
   if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
 
   if (filter === 'All') {
@@ -35,16 +36,22 @@ const GamesList = ({
     filteredGames = filteredGames.filter(x => x.genres[0].name === filter);
   }
 
+  console.log(filteredGames);
+
   return (
     <div className="Games-list">
+      <GamesForm />
       <Filter handleFilterChange={handleChangeFilter} />
-      <div>
+      <section className="games">
         {filteredGames.map(x => (
-          <h2 key={x.id}>
-            <Link to={`/games/${x.slug}`}>{x.name}</Link>
-          </h2>
+          <article key={x.id}>
+            <Link to={`/games/${x.slug}`}>
+              <img src={x.background_image} alt={x.name} />
+              <p>{x.name}</p>
+            </Link>
+          </article>
         ))}
-      </div>
+      </section>
     </div>
   );
 };
