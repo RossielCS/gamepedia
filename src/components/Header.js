@@ -1,5 +1,5 @@
 import React from 'react';
-import GamesForm from '../containers/GamesForm';
+import GamesForm from './GamesForm';
 
 const Header = () => (
   <div>

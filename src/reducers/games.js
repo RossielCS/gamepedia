@@ -11,19 +11,12 @@ const gamesReducer = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload,
-        fetchedList: true,
         fetching: false,
       };
     case 'RECEIVE_GAME':
       return {
         ...state,
         item: action.payload,
-        fetching: false,
-      };
-    case 'SEARCH_GAME':
-      return {
-        ...state,
-        items: action.payload,
         fetching: false,
       };
     case 'FETCH_DATA':
