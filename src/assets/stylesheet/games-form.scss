@@ -1,20 +1,23 @@
+@import 'variables';
+
 .Games-form {
   form {
-    padding: 10px 0;
+    padding: 20px 0 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0ee;
+    background-color: $secondary-color-lighter;
 
     input[type=text] {
       height: 35px;
-      width: 200px;
+      width: 300px;
       padding-left: 10px;
-      border: 1px solid #d8d7dc;
+      border: 1px solid $secondary-color-darker;
       font-family: 'Castoro', serif;
+      color:  #747373;
 
       &::placeholder {
-        color: #d8d7dc;
+        color: $secondary-color-darker;
       }
     }
 
@@ -22,7 +25,7 @@
       position: relative;
       height: 35px;
       width: 50px;
-      border: 1px solid #d8d7dc;
+      border: 1px solid $secondary-color-darker;
       border-left: none;
       background-color: #fff;
 

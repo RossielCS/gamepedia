@@ -1,10 +1,12 @@
+@import 'variables';
+
 .Header {
   p {
     padding: 20px 0;
     font-family: 'MuseoModerno', cursive;
     font-weight: 700;
     font-size: 38px;
-    color: #e1d79d;
-    background-color: #100c1a;
+    color: $primary-color;
+    background-color: $terciary-color;
   }
 }

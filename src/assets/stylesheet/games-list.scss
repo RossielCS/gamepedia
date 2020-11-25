@@ -1,0 +1,32 @@
+@import 'variables';
+
+.Games-list {
+  .Filter {
+    display: flex;
+    justify-content: center;
+    background-color: $secondary-color-lighter;
+
+    div {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      font-family: 'MuseoModerno', cursive;
+      padding-bottom: 20px;
+
+      p {
+        margin-bottom: 5px;
+        text-align: left;
+        color: #747373;
+      }
+
+      select {
+        height: 35px;
+        width: 100%;
+        padding-left: 9px;
+        color: #747373;
+        font-family: 'Castoro', serif;
+        border: 1px solid $secondary-color-darker;
+      }
+    }
+  }
+}

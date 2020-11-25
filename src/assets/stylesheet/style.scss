@@ -1,9 +1,9 @@
 @import 'reset';
+@import 'variables';
 @import 'header';
 @import 'games-form';
 @import 'games-list';
 
 .App {
   text-align: center;
-  background-color: brown;
 }
