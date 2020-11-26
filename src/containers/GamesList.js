@@ -53,13 +53,17 @@ const GamesList = ({
         {filteredGames.map(x => (
           <article key={x.id}>
             <Link to={`/games/${x.slug}`}>
-              <p>
-                {x.name.toUpperCase()}
-                {x.parent_platforms.map(a => (
-                  <span key={`platform-${addCount()}`}>{a.platform.name}</span>
-                ))}
-              </p>
-              <img src={x.background_image} alt={x.name} />
+              <div className="art-info">
+                <p>
+                  {x.name.toUpperCase()}
+                </p>
+                <div>
+                  {x.parent_platforms.map(a => (
+                    <img src={iconsList[a.platform.name.toLowerCase()]} alt={a.platform.name} key={`platform-${addCount()}`} />
+                  ))}
+                </div>
+              </div>
+              <img className="art-background" src={x.background_image} alt={x.name} />
             </Link>
           </article>
         ))}

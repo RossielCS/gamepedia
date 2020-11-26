@@ -9,20 +9,23 @@ import nintendo from '../assets/images/i-nintendo-15.png';
 import pc from '../assets/images/i-windows-client-15.png';
 import playstation from '../assets/images/i-playstation-15.png';
 import sega from '../assets/images/i-sega-15.png';
+import web from '../assets/images/i-web-15.png';
 import xbox from '../assets/images/i-xbox-15.png';
 
 const iconsList = {
   '3do': threeDO,
   android,
-  apple,
+  'apple macintosh': apple,
   atari,
-  commodore,
+  'commodore / amiga': commodore,
   ios,
   linux,
+  'neo geo': nintendo,
   nintendo,
   pc,
   playstation,
   sega,
+  web,
   xbox,
 };
 
