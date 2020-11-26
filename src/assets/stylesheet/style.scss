@@ -6,7 +6,8 @@
 @import 'games-list';
 
 .App {
-  // min-width: 1280px;
   margin: 0 auto;
+  min-height: 100vh;
+  min-width: 100vw;
   text-align: center;
 }

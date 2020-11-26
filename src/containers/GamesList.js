@@ -7,6 +7,7 @@ import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
 import iconsList from '../helpers/iconsList';
 import controller from '../assets/images/i-controller-100.png';
+import loadingSpinner from '../assets/images/i-wait-100.png';
 
 const GamesList = ({
   match, items, filter, fetching, error, fetchGamesList, changeFilter,
@@ -37,8 +38,8 @@ const GamesList = ({
   if (fetching) {
     return (
       <div className="loading">
-        <p>Loading...</p>
-        <img src="" alt="loading" />
+        <p>Loading</p>
+        <img src={loadingSpinner} alt="loading" />
       </div>
     );
   }
