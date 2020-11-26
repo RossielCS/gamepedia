@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .loading {
-  @include gameslist-flex($terciary-color);
+  @include gameslist-flex;
 
   p {
     margin-top: -100px;
@@ -30,7 +30,7 @@
 }
 
 .Games-list {
-  @include gameslist-flex($terciary-color);
+  @include gameslist-flex;
 
   .games {
     margin: 20px 0;

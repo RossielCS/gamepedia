@@ -1,6 +1,13 @@
 @import 'variables';
 
 .Footer {
-  min-height: 15vh;
-  background-color: $primary-color;
+  min-height: 10vh;
+  margin: 0 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid $primary-color;
+  color: $primary-color;
+  font-family: 'Montserrat Alternates', sans-serif;
 }
