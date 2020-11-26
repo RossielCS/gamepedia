@@ -1,0 +1,8 @@
+@mixin gameslist-flex ($color) {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color;
+}

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
-import { fetchGamesList, changeFilter } from '../actions';
+import { connect } from 'react-redux';
+import { changeFilter } from '../actions';
 import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
 import iconsList from '../helpers/iconsList';
@@ -10,9 +10,9 @@ import controller from '../assets/images/i-controller-100.png';
 import loadingSpinner from '../assets/images/i-wait-100.png';
 
 const GamesList = ({
-  match, items, filter, fetching, error, fetchGamesList, changeFilter,
+  items, filter, fetching, error, changeFilter,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   let filteredGames = [];
   let idCount = 0;
 
@@ -24,7 +24,7 @@ const GamesList = ({
   const handleChangeFilter = filter => {
     changeFilter(filter);
   };
-
+  /*
   useEffect(() => {
     let { query } = match.params;
     if (query) {
@@ -34,8 +34,8 @@ const GamesList = ({
     }
     dispatch(fetchGamesList(query));
   }, []);
-
-  if (fetching) {
+  */
+  if (fetching || !fetching) {
     return (
       <div className="loading">
         <p>Loading</p>
@@ -85,19 +85,21 @@ const GamesList = ({
 };
 
 GamesList.propTypes = {
+  /*
   match: PropTypes.shape({
     params: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
+  */
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   filter: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
-  fetchGamesList: PropTypes.func.isRequired,
+  // fetchGamesList: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchGamesList,
+  // fetchGamesList,
   changeFilter: filter => dispatch(changeFilter(filter)),
 });
 

@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <div className="Header">
-    <p>gamepedia</p>
+    <Link to="/">
+      <p>gamepedia</p>
+    </Link>
   </div>
 );
 
