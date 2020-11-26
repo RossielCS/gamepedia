@@ -6,6 +6,7 @@ import { fetchGamesList, changeFilter } from '../actions';
 import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
 import iconsList from '../helpers/iconsList';
+import controller from '../assets/images/i-controller-100.png';
 
 const GamesList = ({
   match, items, filter, fetching, error, fetchGamesList, changeFilter,
@@ -33,7 +34,15 @@ const GamesList = ({
     dispatch(fetchGamesList(query));
   }, []);
 
-  if (fetching) return <div className="loading">Loading...</div>;
+  if (fetching) {
+    return (
+      <div className="loading">
+        <p>Loading...</p>
+        <img src="" alt="loading" />
+      </div>
+    );
+  }
+
   if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
 
   if (filter === 'All') {
@@ -63,7 +72,9 @@ const GamesList = ({
                   ))}
                 </div>
               </div>
-              <img className="art-background" src={x.background_image} alt={x.name} />
+              {x.background_image
+                ? <img className="art-background" src={x.background_image} alt={x.name} />
+                : <img className="art-background" src={controller} alt={x.name} />}
             </Link>
           </article>
         ))}
