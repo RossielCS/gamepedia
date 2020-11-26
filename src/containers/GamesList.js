@@ -5,12 +5,19 @@ import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
 import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
+import iconsList from '../helpers/iconsList';
 
 const GamesList = ({
   match, items, filter, fetching, error, fetchGamesList, changeFilter,
 }) => {
   const dispatch = useDispatch();
   let filteredGames = [];
+  let idCount = 0;
+
+  const addCount = () => {
+    idCount += 1;
+    return idCount;
+  };
 
   const handleChangeFilter = filter => {
     changeFilter(filter);
@@ -46,7 +53,12 @@ const GamesList = ({
         {filteredGames.map(x => (
           <article key={x.id}>
             <Link to={`/games/${x.slug}`}>
-              <p>{x.name.toUpperCase()}</p>
+              <p>
+                {x.name.toUpperCase()}
+                {x.parent_platforms.map(a => (
+                  <span key={`platform-${addCount()}`}>{a.platform.name}</span>
+                ))}
+              </p>
               <img src={x.background_image} alt={x.name} />
             </Link>
           </article>
