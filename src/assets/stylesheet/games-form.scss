@@ -8,11 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $secondary-color-lighter;
 
     input[type=text] {
       height: 35px;
-      width: 300px;
+      max-width: 300px;
+      min-width: 200px;
       padding-left: 10px;
       border: 1px solid $secondary-color-darker;
       font-family: 'Castoro', serif;

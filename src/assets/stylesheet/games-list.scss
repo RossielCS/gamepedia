@@ -32,7 +32,14 @@
 .Games-list {
   @include gameslist-flex;
 
+  .games-form-filter {
+    width: 100%;
+    background-color: $secondary-color-lighter;
+  }
+
   .games {
+    min-width: 360px;
+    max-width: 1366px;
     margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
