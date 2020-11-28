@@ -44,7 +44,15 @@ const GamesList = ({
     );
   }
 
-  if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
+  if (error.length > 0) {
+    return (
+      <div className="error">
+        <p>
+          {`ERROR: ${error}`}
+        </p>
+      </div>
+    );
+  }
 
   if (filter === 'All') {
     filteredGames = items;

@@ -5,7 +5,7 @@ import { fetchGame } from '../actions';
 import loadingSpinner from '../assets/images/i-wait-100.png';
 
 const Game = ({
-  match, item, fetching, error, fetchGame,
+  match, item, error, fetchGame,
 }) => {
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const Game = ({
     dispatch(fetchGame(match));
   }, [dispatch]);
 
-  if (fetching) {
+  if (!item.genres) {
     return (
       <div className="loading">
         <p>Loading</p>
@@ -21,10 +21,18 @@ const Game = ({
       </div>
     );
   }
-  if (error.length > 0) return <div>{`ERROR: ${error}`}</div>;
+
+  if (error.length > 0) {
+    return (
+      <div className="error">
+        <p>
+          {`ERROR: ${error}`}
+        </p>
+      </div>
+    );
+  }
 
   console.log(item);
-  console.log(item.genres);
 
   return (
     <div className="Game">
@@ -34,9 +42,7 @@ const Game = ({
       </header>
       <div>
         <p>
-          {item.name}
-        </p>
-        <p>
+          {item.genres[0].name}
           {item.description_raw}
         </p>
       </div>
@@ -53,9 +59,8 @@ Game.propTypes = {
     name: PropTypes.string,
     background_image: PropTypes.string,
     description_raw: PropTypes.string,
-    genres: PropTypes.arrayOf(PropTypes.string),
+    genres: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
-  fetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetchGame: PropTypes.func.isRequired,
 };

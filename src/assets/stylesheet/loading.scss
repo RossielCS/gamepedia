@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'mixins';
+
+.loading {
+  @include gameslist-flex;
+
+  p {
+    margin-top: -100px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 1.2rem;
+    color: $secondary-color;
+  }
+
+  img {
+    margin-top: 40px;
+    width: 150px;
+    height: 150px;
+    animation: rotation 3s infinite linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(359deg);
+    }
+  }
+}
+
+.error {
+  @include gameslist-flex;
+
+  p {
+    margin-top: -100px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 1.2rem;
+    color: $secondary-color;
+  }
+}
