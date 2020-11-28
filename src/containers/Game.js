@@ -38,39 +38,42 @@ const Game = ({
     <div className="Game">
       <header>
         <img src={item.background_image} alt={item.name} />
-        <h1>{item.name}</h1>
+        <h2>{item.name}</h2>
       </header>
       <article>
-        <p>
-          {`ABOUT: ${item.description_raw}`}
+        <p className="art-about">
+          ABOUT
+          <br />
+          <span>{item.description_raw}</span>
         </p>
         <p>
-          {`RELEASE DATE: ${item.released}`}
+          {`RELEASE DATE ${item.released}`}
         </p>
         <ul>
-          GENRE:
+          GENRE
           {item.genres.map(x => (
             <li key={x.id}>{x.name}</li>
           ))}
         </ul>
         <ul>
-          DEVELOPER:
+          DEVELOPER
           {item.developers.map(x => (
             <li key={x.id}>{x.name}</li>
           ))}
         </ul>
         <ul>
-          PLATFORM:
+          PLATFORM
           {item.platforms.map(x => (
             <li key={x.platform.id}>{x.platform.name}</li>
           ))}
         </ul>
         <p>
-          {`ESRB: ${item.esrb_rating.name}`}
+          {`ESRB ${item.esrb_rating.name}`}
         </p>
         <p>
+          METACRITIC
           <a href={item.metacritic_url} target="_blank" rel="noreferrer">
-            {`METACRITIC: ${item.metacritic}`}
+            {item.metacritic}
           </a>
         </p>
         <p>

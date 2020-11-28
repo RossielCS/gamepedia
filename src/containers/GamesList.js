@@ -72,9 +72,9 @@ const GamesList = ({
           <article key={x.id}>
             <Link to={`/games/${x.slug}`}>
               <div className="art-info">
-                <p>
+                <h2>
                   {x.name.toUpperCase()}
-                </p>
+                </h2>
                 <div>
                   {x.parent_platforms.map(a => (
                     <img src={iconsList[a.platform.name.toLowerCase()]} alt={a.platform.name} key={`platform-${addCount()}`} />

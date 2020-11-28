@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => (
   <div className="Header">
     <a href="/">
-      <p>gamepedia</p>
+      <h1>gamepedia</h1>
     </a>
   </div>
 );

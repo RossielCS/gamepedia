@@ -13,9 +13,25 @@
     img {
       width: 100%;
     }
+
+    h2 {
+      margin-top: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
   }
 
   article {
+    margin-top: 20px;
 
+    .art-about {
+      text-align: left;
+      font-weight: 600;
+
+      span {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
   }
 }
