@@ -45,27 +45,26 @@ const Game = ({
           {`ABOUT: ${item.description_raw}`}
         </p>
         <p>
-          {`RELEASED: ${item.released}`}
+          {`RELEASE DATE: ${item.released}`}
         </p>
-        <p>
-          {`GENRE: ${item.genres[0].name}`}
-        </p>
-        <p>
-          {`PLATFORMS: ${
-            <ul>
-              {item.developers.map(x => (
-                <li key={x.id}>{x.name}</li>
-              ))}
-            </ul>}`}
-        </p>
-        <p>
-          {`PLATFORMS: ${
-            <ul>
-              {item.parent_platforms.map(x => (
-                <li key={x.platform.id}>{x.platform.name}</li>
-              ))}
-            </ul>}`}
-        </p>
+        <ul>
+          GENRE:
+          {item.genres.map(x => (
+            <li key={x.id}>{x.name}</li>
+          ))}
+        </ul>
+        <ul>
+          DEVELOPER:
+          {item.developers.map(x => (
+            <li key={x.id}>{x.name}</li>
+          ))}
+        </ul>
+        <ul>
+          PLATFORM:
+          {item.platforms.map(x => (
+            <li key={x.platform.id}>{x.platform.name}</li>
+          ))}
+        </ul>
         <p>
           {`ESRB: ${item.esrb_rating.name}`}
         </p>
@@ -95,8 +94,8 @@ Game.propTypes = {
     description_raw: PropTypes.string,
     genres: PropTypes.arrayOf(PropTypes.object),
     released: PropTypes.string,
-    developers: PropTypes.arrayOf(PropTypes.object),
-    parent_platforms: PropTypes.arrayOf(PropTypes.object),
+    developers: PropTypes.arrayOf(PropTypes.any),
+    platforms: PropTypes.arrayOf(PropTypes.any),
     esrb_rating: PropTypes.shape({
       name: PropTypes.string,
     }),
