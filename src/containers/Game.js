@@ -41,46 +41,54 @@ const Game = ({
         <h2>{item.name}</h2>
       </header>
       <article>
-        <p className="art-about">
-          ABOUT
-          <br />
-          <span>{item.description_raw}</span>
-        </p>
-        <p>
-          {`RELEASE DATE ${item.released}`}
-        </p>
-        <ul>
-          GENRE
-          {item.genres.map(x => (
-            <li key={x.id}>{x.name}</li>
-          ))}
-        </ul>
-        <ul>
-          DEVELOPER
-          {item.developers.map(x => (
-            <li key={x.id}>{x.name}</li>
-          ))}
-        </ul>
-        <ul>
-          PLATFORM
-          {item.platforms.map(x => (
-            <li key={x.platform.id}>{x.platform.name}</li>
-          ))}
-        </ul>
-        <p>
-          {`ESRB ${item.esrb_rating.name}`}
-        </p>
-        <p>
-          METACRITIC
-          <a href={item.metacritic_url} target="_blank" rel="noreferrer">
-            {item.metacritic}
-          </a>
-        </p>
-        <p>
-          <a href={item.website} target="_blank" rel="noreferrer">
-            {item.website}
-          </a>
-        </p>
+        <div className="art-about">
+          <p className="about-title">ABOUT</p>
+          <p className="about-desc">{item.description_raw}</p>
+        </div>
+        <section className="art-info">
+          <ul>
+            <p>RELEASE DATE</p>
+            {item.released}
+          </ul>
+          <ul>
+            <p>GENRE</p>
+            {item.genres.map(x => (
+              <li key={x.id}>{x.name}</li>
+            ))}
+          </ul>
+          <ul>
+            <p>DEVELOPER</p>
+            {item.developers.map(x => (
+              <li key={x.id}>{x.name}</li>
+            ))}
+          </ul>
+          <ul>
+            <p>PLATFORM</p>
+            {item.platforms.map(x => (
+              <li key={x.platform.id}>{x.platform.name}</li>
+            ))}
+          </ul>
+          <ul>
+            <p>ESRB</p>
+            <li>{item.esrb_rating.name}</li>
+          </ul>
+          <ul>
+            <p>METACRITIC</p>
+            <li>
+              <a href={item.metacritic_url} target="_blank" rel="noreferrer">
+                {item.metacritic}
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <p>WEBSITE</p>
+            <li>
+              <a href={item.website} target="_blank" rel="noreferrer">
+                {item.website}
+              </a>
+            </li>
+          </ul>
+        </section>
       </article>
     </div>
   ) : null;
