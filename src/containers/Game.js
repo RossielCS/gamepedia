@@ -5,7 +5,7 @@ import { fetchGame } from '../actions';
 import loadingSpinner from '../assets/images/i-wait-100.png';
 
 const Game = ({
-  match, item, error, fetchGame,
+  match, item, fetching, error, fetchGame,
 }) => {
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const Game = ({
     dispatch(fetchGame(match));
   }, [dispatch]);
 
-  if (!item.genres) {
+  if (fetching) {
     return (
       <div className="loading">
         <p>Loading</p>
@@ -34,20 +34,54 @@ const Game = ({
 
   console.log(item);
 
-  return (
+  return item.genres ? (
     <div className="Game">
       <header>
         <img src={item.background_image} alt={item.name} />
         <h1>{item.name}</h1>
       </header>
-      <div>
+      <article>
         <p>
-          {item.genres[0].name}
-          {item.description_raw}
+          {`ABOUT: ${item.description_raw}`}
         </p>
-      </div>
+        <p>
+          {`RELEASED: ${item.released}`}
+        </p>
+        <p>
+          {`GENRE: ${item.genres[0].name}`}
+        </p>
+        <p>
+          {`PLATFORMS: ${
+            <ul>
+              {item.developers.map(x => (
+                <li key={x.id}>{x.name}</li>
+              ))}
+            </ul>}`}
+        </p>
+        <p>
+          {`PLATFORMS: ${
+            <ul>
+              {item.parent_platforms.map(x => (
+                <li key={x.platform.id}>{x.platform.name}</li>
+              ))}
+            </ul>}`}
+        </p>
+        <p>
+          {`ESRB: ${item.esrb_rating.name}`}
+        </p>
+        <p>
+          <a href={item.metacritic_url} target="_blank" rel="noreferrer">
+            {`METACRITIC: ${item.metacritic}`}
+          </a>
+        </p>
+        <p>
+          <a href={item.website} target="_blank" rel="noreferrer">
+            {item.website}
+          </a>
+        </p>
+      </article>
     </div>
-  );
+  ) : null;
 };
 
 Game.propTypes = {
@@ -60,7 +94,17 @@ Game.propTypes = {
     background_image: PropTypes.string,
     description_raw: PropTypes.string,
     genres: PropTypes.arrayOf(PropTypes.object),
+    released: PropTypes.string,
+    developers: PropTypes.arrayOf(PropTypes.object),
+    parent_platforms: PropTypes.arrayOf(PropTypes.object),
+    esrb_rating: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    metacritic: PropTypes.number,
+    metacritic_url: PropTypes.string,
+    website: PropTypes.string,
   }).isRequired,
+  fetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetchGame: PropTypes.func.isRequired,
 };
