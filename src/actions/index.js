@@ -13,15 +13,11 @@ const consumeAPI = async (url, dispatch) => {
 };
 
 const fetchGamesList = match => dispatch => {
-  let api = null;
-  if (match.length) {
-    api = `search=${match}`;
-  } else {
-    api = 'page_size=40';
-  }
+  let api = '';
+  if (match.length) api = `search=${match}&`;
 
   fetchData(dispatch);
-  consumeAPI(`https://api.rawg.io/api/games?${api}`, dispatch)
+  consumeAPI(`https://api.rawg.io/api/games?${api}page_size=40`, dispatch)
     .then(result => dispatch({
       type: 'RECEIVE_GAMES_LIST',
       payload: result.results,
