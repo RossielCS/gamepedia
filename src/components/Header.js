@@ -1,10 +1,16 @@
 import React from 'react';
+import GamesForm from './GamesForm';
 
 const Header = () => (
   <div className="Header">
-    <a href="/">
-      <h1>gamepedia</h1>
-    </a>
+    <div className="header-title">
+      <h1>
+        <a href="/">
+          gamepedia
+        </a>
+      </h1>
+    </div>
+    <GamesForm className="Games-form" />
   </div>
 );
 

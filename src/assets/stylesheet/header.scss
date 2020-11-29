@@ -1,18 +1,32 @@
 @import 'variables';
 
 .Header {
-  min-height: 15vh;
+  min-height: 20vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 
-  a {
-    text-decoration: none;
+  .header-title {
+    position: relative;
+    min-height: 10vh;
 
     h1 {
-      font-weight: 700;
-      font-size: 38px;
-      color: $primary-color;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      a {
+        font-weight: 700;
+        font-size: 38px;
+        color: $primary-color;
+        text-decoration: none;
+      }
     }
+  }
+
+  .Games-form {
+    width: 100%;
+    min-height: 10vh;
+    background-color: $secondary-color-lighter;
   }
 }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
-import GamesForm from '../components/GamesForm';
 import Filter from '../components/Filter';
 import iconsList from '../helpers/iconsList';
 import controller from '../assets/images/i-controller-100.png';
@@ -63,8 +62,7 @@ const GamesList = ({
 
   return (
     <div className="Games-list">
-      <div className="games-form-filter">
-        <GamesForm />
+      <div className="games-filter">
         <Filter handleFilterChange={handleChangeFilter} />
       </div>
       <section className="games">
