@@ -1,7 +1,7 @@
 const filterGenres = items => {
   const games = [...items];
   const savedGenres = [];
-  let id = null;
+  let id;
   const result = [];
 
   for (let i = 0; i < games.length; i += 1) {
