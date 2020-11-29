@@ -32,8 +32,6 @@ const Game = ({
     );
   }
 
-  console.log(item);
-
   return item.genres ? (
     <div className="Game">
       <header>
@@ -48,7 +46,7 @@ const Game = ({
         <section className="art-info">
           <ul>
             <p>RELEASE DATE</p>
-            {item.released}
+            <li>{item.released}</li>
           </ul>
           <ul>
             <p>GENRE</p>
