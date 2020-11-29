@@ -3,11 +3,18 @@ import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchGame } from '../actions';
 import loadingSpinner from '../assets/images/i-wait-100.png';
+import controller from '../assets/images/i-controller-100.png';
 
 const Game = ({
   match, item, fetching, error, fetchGame,
 }) => {
   const dispatch = useDispatch();
+  const itemKeys = [
+    'description_raw', 'genres',
+    'released', 'developers', 'platforms',
+    'metacritic', 'metacritic_url', 'website',
+  ];
+  const itemData = {};
 
   useEffect(() => {
     dispatch(fetchGame(match));
@@ -32,49 +39,73 @@ const Game = ({
     );
   }
 
+  if (Object.keys(item).length) {
+    let data;
+    for (let i = 0; i < itemKeys.length; i += 1) {
+      data = item[itemKeys[i]];
+      if (data === null) {
+        itemData[itemKeys[i]] = 'N/A';
+      } else if (typeof data === 'object') {
+        if (data.length === 0) {
+          itemData[itemKeys[i]] = [{ id: i, name: 'N/A' }];
+        } else {
+          itemData[itemKeys[i]] = [...data];
+        }
+      } else if (typeof data === 'string' && data.length === 0) {
+        itemData[itemKeys[i]] = 'N/A';
+      } else {
+        itemData[itemKeys[i]] = item[itemKeys[i]];
+      }
+    }
+  }
+
   return item.genres ? (
     <div className="Game">
       <header>
-        <img src={item.background_image} alt={item.name} />
+        {item.background_image
+          ? <img className="art-background" src={item.background_image} alt={item.name} />
+          : <img className="art-background" src={controller} alt={item.name} />}
         <h2>{item.name}</h2>
       </header>
       <article>
         <div className="art-about">
           <p className="about-title">ABOUT</p>
-          <p className="about-desc">{item.description_raw}</p>
+          <p className="about-desc">{itemData.description_raw}</p>
         </div>
         <section className="art-info">
           <ul>
             <p>RELEASE DATE</p>
-            <li>{item.released}</li>
+            <li>{itemData.released}</li>
           </ul>
           <ul>
             <p>GENRE</p>
-            {item.genres.map(x => (
+            {itemData.genres.map(x => (
               <li key={x.id}>{x.name}</li>
             ))}
           </ul>
           <ul>
             <p>DEVELOPER</p>
-            {item.developers.map(x => (
+            {itemData.developers.map(x => (
               <li key={x.id}>{x.name}</li>
             ))}
           </ul>
           <ul>
             <p>PLATFORM</p>
-            {item.platforms.map(x => (
+            {itemData.platforms.map(x => (
               <li key={x.platform.id}>{x.platform.name}</li>
             ))}
           </ul>
           <ul>
             <p>ESRB</p>
-            <li>{item.esrb_rating.name}</li>
+            {item.esrb_rating
+              ? <li>{item.esrb_rating.name}</li>
+              : <li>N/A</li>}
           </ul>
           <ul>
             <p>METACRITIC</p>
             <li>
               <a href={item.metacritic_url} target="_blank" rel="noreferrer">
-                {item.metacritic}
+                {itemData.metacritic}
               </a>
             </li>
           </ul>
@@ -82,7 +113,7 @@ const Game = ({
             <p>WEBSITE</p>
             <li>
               <a href={item.website} target="_blank" rel="noreferrer">
-                {item.website}
+                {itemData.website}
               </a>
             </li>
           </ul>
@@ -97,7 +128,6 @@ Game.propTypes = {
     params: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
   item: PropTypes.shape({
-    id: PropTypes.number,
     name: PropTypes.string,
     background_image: PropTypes.string,
     description_raw: PropTypes.string,
