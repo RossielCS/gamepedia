@@ -16,7 +16,7 @@ const Filter = ({ handleFilterChange }) => {
     <div className="Filter">
       <div>
         <label htmlFor="filter">
-          <p>genres</p>
+          <p>filter by genre</p>
           <select onChange={e => handleFilterChange(e.target.value)}>
             <option key="All" value="All" defaultValue>All</option>
             {genres.map(
