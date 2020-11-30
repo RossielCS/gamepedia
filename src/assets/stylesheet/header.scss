@@ -1,13 +1,13 @@
 @import 'variables';
 
 .Header {
-  min-height: 20vh;
+  height: 20vh;
   display: flex;
   flex-direction: column;
 
   .header-title {
     position: relative;
-    min-height: 10vh;
+    height: 10vh;
 
     h1 {
       position: absolute;
@@ -22,11 +22,5 @@
         text-decoration: none;
       }
     }
-  }
-
-  .Games-form {
-    width: 100%;
-    min-height: 10vh;
-    background-color: $secondary-color-lighter;
   }
 }
