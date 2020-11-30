@@ -22,5 +22,30 @@ describe('async actions', () => {
     fetchMock.restore();
   });
 
-  
+  // fetchGamesList
+  test('It should create RECEIVE_GAMES_LIST when fetching games has been done', () => {
+    fetchMock.get('*', {
+      results: {
+        results: [{ id: 3498, name: 'Grand Theft Auto V' }],
+      },
+    });
+
+    const expectedActions = [
+      { type: 'FETCH_DATA' },
+      {
+        type: 'RECEIVE_GAMES_LIST',
+        payload: {
+          results: [{ id: 3498, name: 'Grand Theft Auto V' }],
+        },
+      },
+    ];
+    const store = mockStore({
+      items: [],
+    });
+
+    return store.dispatch(fetchGamesList(''))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
 });
