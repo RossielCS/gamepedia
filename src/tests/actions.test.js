@@ -49,7 +49,7 @@ describe('async actions', () => {
       });
   });
 
-  test('It should create FETCH_ERROR when fetching does not return a result', () => {
+  test('It should create FETCH_ERROR if could not retrieve the data', () => {
     fetchMock.get('https://api.rawg.io/api/games?page_size=40', 404);
 
     const expectedActions = [
@@ -63,7 +63,26 @@ describe('async actions', () => {
 
     return store.dispatch(fetchGamesList(''))
       .then(() => {
-        console.log(store.getActions());
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  test('It should create FETCH_ERROR when fetching does not return a response', () => {
+    fetchMock.mock('https://api.rawg.io/api/games?page_size=40', () => {
+      throw new Error('error');
+    });
+
+    const expectedActions = [
+      { type: 'FETCH_DATA' },
+      { type: 'FETCH_ERROR', payload: 'error' },
+    ];
+    const store = mockStore({
+      items: [],
+      error: '',
+    });
+
+    return store.dispatch(fetchGamesList(''))
+      .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
