@@ -21,6 +21,9 @@ The main requirements were:<br />
 - NPM,
 - Nodejs,
 - Yarn,
+- Eslint,
+- Stylelint,
+- Jest,
 - React,
 - Redux,
 - JavaScript,
@@ -75,9 +78,19 @@ Instructions from [Heroku Buildpack](https://github.com/mars/create-react-app-bu
 `heroku open`
 
 ## :gem:  Features
-1. The user can add a book with title and category.
-2. It has a "remove book" button to delete it from the bookstore.
-3. The user can filter the displayed books by category.
+1. It displays the most popular games.
+2. The game's list can be filtered by genre.
+3. The user can search a game by title.
+4. When the user clicks on a game, it loads a webpage with the details of the item.
+
+## :memo: Tests
+- It contains unit tests for:
+  1. Action creators.
+  2. Reducers.
+  3. Helpers.
+
+- To run the tests.   
+`npm run test`
 
 ## :woman:  Author
 
