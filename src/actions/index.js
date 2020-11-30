@@ -1,4 +1,4 @@
-const fetchData = dispatch => dispatch({ type: 'FETCH_DATA' });
+const fetchData = () => ({ type: 'FETCH_DATA' });
 const responseNotOk = dispatch => {
   dispatch({ type: 'FETCH_ERROR', payload: 'The data could not be retrieved.' });
 };
@@ -9,20 +9,23 @@ const fetchError = (dispatch, error) => {
 const consumeAPI = async (url, dispatch) => {
   const response = await fetch(url);
   if (!response.ok) responseNotOk(dispatch);
-  return response.json();
+  return response;
 };
 
-const fetchGamesList = match => dispatch => {
+const fetchGamesList = match => {
   let api = '';
   if (match.length) api = `search=${match}&`;
 
-  fetchData(dispatch);
-  consumeAPI(`https://api.rawg.io/api/games?${api}page_size=40`, dispatch)
-    .then(result => dispatch({
-      type: 'RECEIVE_GAMES_LIST',
-      payload: result.results,
-    }))
-    .catch(error => fetchError(dispatch, error));
+  return dispatch => {
+    dispatch(fetchData());
+    return consumeAPI(`https://api.rawg.io/api/games?${api}page_size=40`, dispatch)
+      .then(res => res.json())
+      .then(result => dispatch({
+        type: 'RECEIVE_GAMES_LIST',
+        payload: result.results,
+      }))
+      .catch(error => fetchError(dispatch, error));
+  };
 };
 
 const fetchGame = match => async dispatch => {
