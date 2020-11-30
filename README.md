@@ -14,7 +14,6 @@ The main requirements were:<br />
 
 <p align="center">
   <img width="800" src="./src/assets/images/screenshot.png">
-  <img width="800" src="./src/assets/images/screenshot.png">
 </p>
 
 ## :hammer:  Built With
