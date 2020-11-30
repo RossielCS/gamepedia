@@ -1,5 +1,5 @@
 import gamesReducer from '../reducers/games';
-// import filtersReducer from '../reducers/filter';
+import filtersReducer from '../reducers/filter';
 
 describe('games reducer', () => {
   test('It should handle RECEIVE_GAMES_LIST', () => {
@@ -62,8 +62,36 @@ describe('games reducer', () => {
       error: 'error message',
     });
   });
+
+  test('It should return a state by default', () => {
+    const action = {};
+
+    expect(gamesReducer(undefined, action)).toEqual({
+      items: [],
+      item: {},
+      fetching: false,
+      error: '',
+    });
+  });
 });
 
 describe('filters reducer', () => {
+  test('It should handle CHANGE_FILTER', () => {
+    const action = {
+      type: 'CHANGE_FILTER',
+      payload: 'Action',
+    };
 
+    expect(filtersReducer(undefined, action)).toEqual({
+      filter: 'Action',
+    });
+  });
+
+  test('It should return a state by default', () => {
+    const action = {};
+
+    expect(filtersReducer(undefined, action)).toEqual({
+      filter: 'All',
+    });
+  });
 });
