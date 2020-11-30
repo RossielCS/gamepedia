@@ -60,7 +60,7 @@ const GamesList = ({
     filteredGames = filteredGames.filter(x => x.genres[0].name === filter);
   }
 
-  return (
+  return items ? (
     <div className="Games-list">
       <div className="games-filter">
         <Filter handleFilterChange={handleChangeFilter} />
@@ -87,7 +87,7 @@ const GamesList = ({
         ))}
       </section>
     </div>
-  );
+  ) : null;
 };
 
 GamesList.propTypes = {
