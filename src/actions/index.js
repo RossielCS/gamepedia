@@ -25,18 +25,24 @@ const fetchGamesList = match => {
         payload: response.results,
       });
     }
+
     return response;
   };
 };
 
 const fetchGame = match => async dispatch => {
-  fetchData(dispatch);
-  consumeAPI(`https://api.rawg.io/api/games/${match.params.id}`, dispatch)
-    .then(result => dispatch({
+  dispatch(fetchData());
+  const response = await consumeAPI(`https://api.rawg.io/api/games/${match.params.id}`, dispatch)
+    .catch(error => dispatch(fetchError(error)));
+
+  if (response.name) {
+    return dispatch({
       type: 'RECEIVE_GAME',
-      payload: result,
-    }))
-    .catch(error => fetchError(dispatch, error));
+      payload: response,
+    });
+  }
+
+  return response;
 };
 
 const changeFilter = filter => ({

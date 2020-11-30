@@ -26,7 +26,10 @@ describe('async actions', () => {
   test('It should create RECEIVE_GAMES_LIST when fetching games has been done', () => {
     fetchMock.get('*', {
       results: {
-        results: [{ id: 3498, name: 'Grand Theft Auto V' }],
+        results: [
+          { id: 3498, name: 'Grand Theft Auto V' },
+          { id: 2845, name: 'Portal' },
+        ],
       },
     });
 
@@ -35,7 +38,10 @@ describe('async actions', () => {
       {
         type: 'RECEIVE_GAMES_LIST',
         payload: {
-          results: [{ id: 3498, name: 'Grand Theft Auto V' }],
+          results: [
+            { id: 3498, name: 'Grand Theft Auto V' },
+            { id: 2845, name: 'Portal' },
+          ],
         },
       },
     ];
@@ -44,6 +50,38 @@ describe('async actions', () => {
     });
 
     return store.dispatch(fetchGamesList(''))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  test('It should create RECEIVE_GAMES_LIST when fetching games by title has been done', () => {
+    fetchMock.get('*', {
+      results: {
+        results: [
+          { id: 3498, name: 'Portal 2' },
+          { id: 2845, name: 'Portal' },
+        ],
+      },
+    });
+
+    const expectedActions = [
+      { type: 'FETCH_DATA' },
+      {
+        type: 'RECEIVE_GAMES_LIST',
+        payload: {
+          results: [
+            { id: 3498, name: 'Portal 2' },
+            { id: 2845, name: 'Portal' },
+          ],
+        },
+      },
+    ];
+    const store = mockStore({
+      items: [],
+    });
+
+    return store.dispatch(fetchGamesList('Portal'))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
