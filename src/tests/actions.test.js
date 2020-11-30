@@ -136,4 +136,22 @@ describe('async actions', () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
+  test('It should create FETCH_ERROR if could not retrieve the data', () => {
+    fetchMock.get('*', 404);
+
+    const expectedActions = [
+      { type: 'FETCH_DATA' },
+      { type: 'FETCH_ERROR', payload: 'The data could not be retrieved.' },
+    ];
+    const store = mockStore();
+    const match = {
+      params: { id: 3498, name: 'Mario' },
+    };
+
+    return store.dispatch(fetchGame(match))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
 });
