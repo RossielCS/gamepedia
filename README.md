@@ -32,7 +32,7 @@ The main requirements were:<br />
 
 ## :earth_americas: Live Demo
 
-You can try it [here](https://rossielcs-catalogue-games.herokuapp.com/).
+You can try it [here](https://rossielcs-catalogue-of-games.herokuapp.com/).
 
 
 ## :computer: Getting Started
