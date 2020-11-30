@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock-jest';
-import { changeFilter, fetchGamesList } from '../actions';
+import { changeFilter, fetchGamesList, fetchGame } from '../actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -45,9 +45,7 @@ describe('async actions', () => {
         },
       },
     ];
-    const store = mockStore({
-      items: [],
-    });
+    const store = mockStore();
 
     return store.dispatch(fetchGamesList(''))
       .then(() => {
@@ -77,9 +75,7 @@ describe('async actions', () => {
         },
       },
     ];
-    const store = mockStore({
-      items: [],
-    });
+    const store = mockStore();
 
     return store.dispatch(fetchGamesList('Portal'))
       .then(() => {
@@ -94,10 +90,7 @@ describe('async actions', () => {
       { type: 'FETCH_DATA' },
       { type: 'FETCH_ERROR', payload: 'The data could not be retrieved.' },
     ];
-    const store = mockStore({
-      items: [],
-      error: '',
-    });
+    const store = mockStore();
 
     return store.dispatch(fetchGamesList(''))
       .then(() => {
@@ -114,12 +107,31 @@ describe('async actions', () => {
       { type: 'FETCH_DATA' },
       { type: 'FETCH_ERROR', payload: 'error' },
     ];
-    const store = mockStore({
-      items: [],
-      error: '',
-    });
+    const store = mockStore();
 
     return store.dispatch(fetchGamesList(''))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  // fetchGame
+  test('It should create RECEIVE_GAME when fetching game has been done', () => {
+    fetchMock.get('*', { id: 3498, name: 'Mario' });
+
+    const expectedActions = [
+      { type: 'FETCH_DATA' },
+      {
+        type: 'RECEIVE_GAME',
+        payload: { id: 3498, name: 'Mario' },
+      },
+    ];
+    const store = mockStore();
+    const match = {
+      params: { id: 3498, name: 'Mario' },
+    };
+
+    return store.dispatch(fetchGame(match))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
