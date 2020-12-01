@@ -19,6 +19,40 @@ const filterGenres = items => {
   return result;
 };
 
+const changeStringValue = (item, itemKeys) => {
+  const gameData = {};
+  const stringProps = [...itemKeys.stringValue];
+
+  for (let i = 0; i < stringProps.length; i += 1) {
+    if (!item[stringProps[i]]) {
+      gameData[stringProps[i]] = 'N/A';
+    } else {
+      gameData[stringProps[i]] = item[stringProps[i]];
+    }
+  }
+  return gameData;
+};
+
+const changeArrayValue = (item, itemKeys) => {
+  const gameData = {};
+  const stringProps = [...itemKeys.arrayValue];
+
+  for (let i = 0; i < stringProps.length; i += 1) {
+    if (!item[stringProps[i]]) {
+      gameData[stringProps[i]] = { id: i, name: 'N/A' };
+    } else if (!item[stringProps[i]].length) {
+      if (stringProps[i] === 'platforms') {
+        gameData[stringProps[i]] = [{ platform: { id: i, name: 'N/A' } }];
+      } else {
+        gameData[stringProps[i]] = [{ id: i, name: 'N/A' }];
+      }
+    } else {
+      gameData[stringProps[i]] = item[stringProps[i]];
+    }
+  }
+  return gameData;
+};
+
 const changeEmptyProperties = (item, itemKeys) => {
   const data = {
     ...(changeStringValue(item, itemKeys)),
