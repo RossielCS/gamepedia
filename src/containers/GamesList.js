@@ -74,9 +74,11 @@ const GamesList = ({
                   {x.name.toUpperCase()}
                 </h2>
                 <div>
-                  {x.parent_platforms.map(a => (
-                    <img src={iconsList[a.platform.name.toLowerCase()]} alt={a.platform.name} key={`platform-${addCount()}`} />
-                  ))}
+                  {x.parent_platforms
+                    ? x.parent_platforms.map(a => (
+                      <img src={iconsList[a.platform.name.toLowerCase()]} alt={a.platform.name} key={`platform-${addCount()}`} />
+                    ))
+                    : <p>N/A</p>}
                 </div>
               </div>
               {x.background_image

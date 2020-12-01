@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchGame } from '../actions';
+import { changeEmptyProperties } from '../helpers';
 import loadingSpinner from '../assets/images/i-wait-100.png';
 import controller from '../assets/images/i-controller-100.png';
 
@@ -9,12 +10,15 @@ const Game = ({
   match, item, fetching, error, fetchGame,
 }) => {
   const dispatch = useDispatch();
-  const itemKeys = [
-    'description_raw', 'genres',
-    'released', 'developers', 'platforms',
-    'metacritic', 'metacritic_url', 'website',
-  ];
-  const itemData = {};
+  const itemKeys = {
+    stringValue: ['description_raw', 'released',
+      'metacritic', 'metacritic_url', 'website',
+    ],
+    arrayValue: ['genres', 'developers',
+      'platforms', 'esrb_rating',
+    ],
+  };
+  let itemData = {};
 
   useEffect(() => {
     dispatch(fetchGame(match));
@@ -39,25 +43,7 @@ const Game = ({
     );
   }
 
-  if (Object.keys(item).length) {
-    let data;
-    for (let i = 0; i < itemKeys.length; i += 1) {
-      data = item[itemKeys[i]];
-      if (data === null) {
-        itemData[itemKeys[i]] = 'N/A';
-      } else if (typeof data === 'object') {
-        if (data.length === 0) {
-          itemData[itemKeys[i]] = [{ id: i, name: 'N/A' }];
-        } else {
-          itemData[itemKeys[i]] = [...data];
-        }
-      } else if (typeof data === 'string' && data.length === 0) {
-        itemData[itemKeys[i]] = 'N/A';
-      } else {
-        itemData[itemKeys[i]] = item[itemKeys[i]];
-      }
-    }
-  }
+  if (Object.keys(item).length) itemData = changeEmptyProperties(item, itemKeys);
 
   return item.genres ? (
     <div className="Game">
@@ -97,9 +83,7 @@ const Game = ({
           </ul>
           <ul>
             <p>ESRB</p>
-            {item.esrb_rating
-              ? <li>{item.esrb_rating.name}</li>
-              : <li>N/A</li>}
+            <li>{itemData.esrb_rating.name}</li>
           </ul>
           <ul>
             <p>METACRITIC</p>

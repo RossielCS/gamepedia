@@ -19,4 +19,13 @@ const filterGenres = items => {
   return result;
 };
 
-export default filterGenres;
+const changeEmptyProperties = (item, itemKeys) => {
+  const data = {
+    ...(changeStringValue(item, itemKeys)),
+    ...(changeArrayValue(item, itemKeys)),
+  };
+
+  return data;
+};
+
+export { filterGenres, changeEmptyProperties };
