@@ -37,12 +37,14 @@ const changeArrayValue = (item, itemKeys) => {
   const gameData = {};
   const stringProps = [...itemKeys.arrayValue];
   for (let i = 0; i < stringProps.length; i += 1) {
-    if (stringProps[i] === 'platforms' && !item[stringProps[i]].length) {
-      gameData[stringProps[i]] = [{ platform: { id: i, name: 'N/A' } }];
-    } else if (!item[stringProps[i]]) {
+    if (item[stringProps[i]] === null) {
       gameData[stringProps[i]] = { name: 'N/A' };
-    } else if (!item[stringProps[i]] === []) {
-      gameData[stringProps[i]] = [{ id: i, name: 'N/A' }];
+    } else if (item[stringProps[i]].length === 0) {
+      if (stringProps[i] === 'platforms') {
+        gameData[stringProps[i]] = [{ platform: { id: i, name: 'N/A' } }];
+      } else {
+        gameData[stringProps[i]] = [{ id: i, name: 'N/A' }];
+      }
     } else {
       gameData[stringProps[i]] = item[stringProps[i]];
     }
