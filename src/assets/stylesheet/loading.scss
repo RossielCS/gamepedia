@@ -2,11 +2,7 @@
 @import 'mixins';
 
 .loading {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include gameslist-flex(center, center);
 
   p {
     margin-top: -100px;
@@ -33,7 +29,7 @@
 }
 
 .error {
-  @include gameslist-flex;
+  @include gameslist-flex(center, center);
 
   p {
     margin-top: -100px;

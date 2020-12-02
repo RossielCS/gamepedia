@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .Games-list {
-  @include gameslist-flex;
+  @include gameslist-flex(flex-start, center);
 
   .games-filter {
     width: 100%;

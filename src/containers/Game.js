@@ -12,7 +12,7 @@ const Game = ({
   const dispatch = useDispatch();
   const itemKeys = {
     stringValue: ['description_raw', 'released',
-      'metacritic', 'metacritic_url', 'website',
+      'metacritic', 'website',
     ],
     arrayValue: ['genres', 'developers',
       'platforms', 'esrb_rating',
@@ -88,9 +88,7 @@ const Game = ({
           <ul>
             <p>METACRITIC</p>
             <li>
-              <a href={item.metacritic_url} target="_blank" rel="noreferrer">
-                {itemData.metacritic}
-              </a>
+              {itemData.metacritic}
             </li>
           </ul>
           <ul>

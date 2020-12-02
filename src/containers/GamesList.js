@@ -60,6 +60,16 @@ const GamesList = ({
     filteredGames = filteredGames.filter(x => x.genres[0].name === filter);
   }
 
+  if (!fetching && !items.length) {
+    return (
+      <div className="error">
+        <p>
+          Your search did not return any results.
+        </p>
+      </div>
+    );
+  }
+
   return items ? (
     <div className="Games-list">
       <div className="games-filter">

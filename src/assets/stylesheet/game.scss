@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .Game {
-  @include gameslist-flex;
+  @include gameslist-flex(flex-start, center);
 
   margin: 20px 20px 40px 20px;
   color: $secondary-color;
