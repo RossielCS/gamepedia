@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { fetchGamesList, changeFilter } from '../actions';
-import Filter from '../components/Filter';
+import Filter from './Filter';
 import iconsList from '../helpers/iconsList';
 import controller from '../assets/images/i-controller-100.png';
 import loadingSpinner from '../assets/images/i-wait-100.png';
