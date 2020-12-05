@@ -3,7 +3,7 @@
 .Footer {
   min-height: 10vh;
   margin: 0 20px;
-  padding: 10px 0 10px 0;
+  padding: 15px 0 10px 0;
   border-top: 1px solid $primary-color;
   color: $primary-color;
   overflow: hidden;
@@ -15,7 +15,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 
     .footer-authors {
       max-height: 6.5vh;

@@ -13,3 +13,20 @@
   background-color: $terciary-color;
   font-family: 'Montserrat Alternates', sans-serif;
 }
+
+@media only screen and (max-width: 540px) {
+  .Games-list {
+    min-height: 55vh;
+  }
+
+  .Footer {
+    min-height: 25vh;
+
+    .footer-container {
+      min-height: 16vh;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
