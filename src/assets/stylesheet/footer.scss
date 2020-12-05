@@ -15,9 +15,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     .footer-authors {
-      height: 9vh;
+      max-height: 6.5vh;
+      min-height: 5vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
