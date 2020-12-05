@@ -4,11 +4,17 @@ import Filter from '../../containers/Filter';
 
 describe('Filter', () => {
   const change = jest.fn();
-  render(<Filter handleFilterChange={change} />, {
-    initialState: {},
+  beforeEach(() => {
+    render(<Filter handleFilterChange={change} />, {
+      initialState: {},
+    });
   });
 
-  test('should render the form element', () => {
+  test('should render the select element', () => {
     expect(screen.getByText('filter by genre')).toBeInTheDocument();
+  });
+
+  test('should render the option \'All\' by default', () => {
+    expect(screen.getByDisplayValue('All')).toBeInTheDocument();
   });
 });
