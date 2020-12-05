@@ -2,9 +2,11 @@ import '@testing-library/jest-dom';
 import { render, screen } from '../test-utils';
 import Footer from '../../components/Footer';
 
-describe('Header', () => {
-  render(<Footer />, {
-    initialState: {},
+describe('Footer', () => {
+  beforeEach(() => {
+    render(<Footer />, {
+      initialState: {},
+    });
   });
 
   test('should render the credits', () => {
@@ -13,5 +15,14 @@ describe('Header', () => {
     expect(screen.getByText('NomNom')).toBeInTheDocument();
     expect(screen.getByText('by')).toBeInTheDocument();
     expect(screen.getByText('Marc-Antoine Roy')).toBeInTheDocument();
+  });
+
+  test('should render the social media icons and names', () => {
+    expect(screen.getByAltText('github')).toBeInTheDocument();
+    expect(screen.getByText('GitHub')).toBeInTheDocument();
+    expect(screen.getByAltText('linkedin')).toBeInTheDocument();
+    expect(screen.getByText('LinkedIn')).toBeInTheDocument();
+    expect(screen.getByAltText('email')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
   });
 });
