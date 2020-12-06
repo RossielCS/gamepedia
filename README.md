@@ -5,9 +5,9 @@
 The app is called "gamepedia" which displays a browsable list of videogames that the user can filter, access the details of each one, and can also search for games by title.<br />
 
 The main requirements were:<br />
-* The web app should have at least two types of pages: 
-    1. One with a list of items that could be filtered by some parameters.
-    2. Another for the item details.<br />
+* The web app should have at least two types of pages:<br /> 
+        a. One with a list of items that could be filtered by some parameters. <br />
+        b. Another for the item details.<br />
 * It should collect the data from an API from the React application.
 
 ## :camera: Screenshot
@@ -23,6 +23,7 @@ The main requirements were:<br />
 - Yarn,
 - Eslint,
 - Stylelint,
+- Sass,
 - Jest,
 - React,
 - Redux,
@@ -84,12 +85,14 @@ Instructions from [Heroku Buildpack](https://github.com/mars/create-react-app-bu
 4. When the user clicks on a game, it loads a webpage with the details of the item.
 
 ## :memo: Tests
-- It contains unit tests for:
-  1. Action creators.
-  2. Reducers.
-  3. Helpers.
+It contains unit tests for:
+  * Presentational components.
+  * Containers.
+  * Action creators.
+  * Reducers.
+  * Helpers.
 
-- To run the tests.   
+To run the tests.   
 `npm run test`
 
 ## :woman:  Author
