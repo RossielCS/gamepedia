@@ -1,0 +1,30 @@
+@import 'variables';
+
+.Filter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  div {
+    max-width: 350px;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+
+    p {
+      margin-bottom: 5px;
+      text-align: left;
+      color: #747373;
+    }
+
+    select {
+      height: 35px;
+      width: 100%;
+      padding-left: 9px;
+      color: #747373;
+      font-family: 'Montserrat Alternates', sans-serif;
+      border: 1px solid $secondary-color-darker;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+@import 'variables';
+
+.Footer {
+  min-height: 10vh;
+  margin: 0 20px;
+  padding: 15px 0 10px 0;
+  border-top: 1px solid $primary-color;
+  color: $primary-color;
+  overflow: hidden;
+
+  .footer-container {
+    min-width: 300px;
+    max-width: 1366px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .footer-authors {
+      max-height: 6.5vh;
+      min-height: 5vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+
+      .app-author {
+        font-size: 0.9rem;
+      }
+
+      .design-author {
+        font-size: 0.7rem;
+      }
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: space-between;
+      width: 180px;
+
+      .icon-container {
+        img {
+          width: 40px;
+          padding: 5px;
+          border: 1px solid $primary-color;
+          border-radius: 20%;
+        }
+
+        span {
+          display: block;
+          margin-top: 5px;
+          font-size: 0.7rem;
+          color: $primary-color;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $secondary-color-lighter;
+    }
+  }
+}

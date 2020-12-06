@@ -1,0 +1,26 @@
+@import 'variables';
+
+.Header {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+
+  .header-title {
+    position: relative;
+    height: 10vh;
+
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      a {
+        font-weight: 700;
+        font-size: 38px;
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
