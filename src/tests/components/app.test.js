@@ -10,7 +10,7 @@ describe('App', () => {
 
     expect(screen.getByText('gamepedia')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Write game\'s name...')).toBeInTheDocument();
-    expect(screen.getByText('Loading')).toBeInTheDocument();
+    expect(screen.getByText('Loading Games')).toBeInTheDocument();
     expect(screen.getByText('Built by Rossiel Carranza')).toBeInTheDocument();
   });
 });

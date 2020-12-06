@@ -27,7 +27,7 @@ const Game = ({
   if (fetching) {
     return (
       <div className="loading">
-        <p>Loading</p>
+        <p>Loading Game</p>
         <img src={loadingSpinner} alt="loading" />
       </div>
     );
