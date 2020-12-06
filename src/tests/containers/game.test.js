@@ -11,6 +11,13 @@ describe('Game', () => {
   const match = {
     params: { id: '3498', name: 'Mario' },
   };
+  const dataStore = {
+    games: {
+      fetching: false,
+      error: 'Error',
+      item: {},
+    },
+  };
 
   test('should display a loading spinner whe fetching a game', () => {
     render(
@@ -21,25 +28,34 @@ describe('Game', () => {
     expect(screen.getByText('Loading Game')).toBeInTheDocument();
   });
 
-  test('should render the game\'s information', () => {
-    const store = mockStore({
-      games: {
-        fetching: false,
-        error: '',
-        item: {
-          name: 'mario',
-          background_image: null,
-          description_raw: '',
-          genres: [],
-          released: '',
-          developers: [],
-          platforms: [],
-          esrb_rating: null,
-          metacritic: null,
-          website: '',
-        },
+  test('should display an error message if could not retrieve the information ', () => {
+    const store = mockStore(dataStore);
+
+    render(
+      <Game match={match} />, {
+        initialState: {},
+        store,
       },
-    });
+    );
+    expect(screen.getByText('ERROR: Error')).toBeInTheDocument();
+  });
+
+  test('should render the game\'s information', () => {
+    dataStore.games.error = '';
+    dataStore.games.item = {
+      name: 'mario',
+      background_image: null,
+      description_raw: '',
+      genres: [],
+      released: '',
+      developers: [],
+      platforms: [],
+      esrb_rating: null,
+      metacritic: null,
+      website: '',
+    };
+    const store = mockStore(dataStore);
+
     render(
       <Game match={match} />, {
         initialState: {},
@@ -55,22 +71,5 @@ describe('Game', () => {
     expect(screen.getByText('ESRB')).toBeInTheDocument();
     expect(screen.getByText('METACRITIC')).toBeInTheDocument();
     expect(screen.getByText('WEBSITE')).toBeInTheDocument();
-  });
-
-  test('should display an error message if could not retrieve the information ', () => {
-    const store = mockStore({
-      games: {
-        fetching: false,
-        error: 'Error',
-        item: {},
-      },
-    });
-    render(
-      <Game match={match} />, {
-        initialState: {},
-        store,
-      },
-    );
-    expect(screen.getByText('ERROR: Error')).toBeInTheDocument();
   });
 });

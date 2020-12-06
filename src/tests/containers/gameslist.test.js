@@ -12,16 +12,19 @@ describe('GamesList', () => {
   const match = { params: { query: '' } };
   const fetchGames = jest.fn();
   const changeFilter = jest.fn();
+  const dataStore = {
+    filter: { filter: 'All' },
+    games: {
+      fetching: false,
+      error: '',
+      items: [],
+    },
+  };
 
   test('should render the loading animation when fetching information', () => {
-    const store = mockStore({
-      filter: { filter: 'All' },
-      games: {
-        fetching: true,
-        error: '',
-        items: [],
-      },
-    });
+    dataStore.games.fetching = true;
+    const store = mockStore(dataStore);
+
     render(<GamesList
       match={match}
       fetchGamesList={fetchGames}
@@ -35,19 +38,15 @@ describe('GamesList', () => {
   });
 
   test('should render the games information', () => {
-    const store = mockStore({
-      filter: { filter: 'All' },
-      games: {
-        fetching: false,
-        error: '',
-        items: [{
-          id: 1,
-          name: 'mario',
-          background_image: null,
-          parent_platforms: null,
-        }],
-      },
-    });
+    dataStore.games.items = [{
+      id: 1,
+      name: 'mario',
+      background_image: null,
+      parent_platforms: null,
+    }];
+    dataStore.games.fetching = false;
+    const store = mockStore(dataStore);
+
     render(
       <Router>
         <GamesList
@@ -64,15 +63,10 @@ describe('GamesList', () => {
     expect(screen.getByText('MARIO')).toBeInTheDocument();
   });
 
-  test('should display an error message if could not retrieve the information ', () => {
-    const store = mockStore({
-      filter: { filter: 'All' },
-      games: {
-        fetching: false,
-        error: 'Error',
-        items: [],
-      },
-    });
+  test('should display an error message if could not retrieve the information', () => {
+    dataStore.games.error = 'Error';
+    const store = mockStore(dataStore);
+
     render(
       <GamesList
         match={match}
@@ -84,5 +78,23 @@ describe('GamesList', () => {
       },
     );
     expect(screen.getByText('ERROR: Error')).toBeInTheDocument();
+  });
+
+  test('should display a message in case the search did not return any results', () => {
+    dataStore.games.error = '';
+    dataStore.games.items = [];
+    const store = mockStore(dataStore);
+
+    render(
+      <GamesList
+        match={match}
+        fetchGamesList={fetchGames}
+        changeFilter={changeFilter}
+      />, {
+        initialState: {},
+        store,
+      },
+    );
+    expect(screen.getByText('Your search did not return any results.')).toBeInTheDocument();
   });
 });
