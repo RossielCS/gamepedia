@@ -1,0 +1,7 @@
+@mixin gameslist-flex($justify, $align) {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}

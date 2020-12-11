@@ -1,0 +1,30 @@
+@import 'reset';
+@import 'variables';
+@import 'header';
+@import 'games-form';
+@import 'filter';
+@import 'loading';
+@import 'games-list';
+@import 'game';
+@import 'footer';
+
+.App {
+  text-align: center;
+  background-color: $terciary-color;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+@media only screen and (max-width: 540px) {
+  .Games-list {
+    min-height: 55vh;
+  }
+
+  .Footer {
+    min-height: 25vh;
+
+    .footer-container {
+      min-height: 16vh;
+      flex-direction: column;
+    }
+  }
+}
