@@ -119,6 +119,7 @@ Give an ⭐️ if you like this project!
 
 ## Ackowledgments
 
+This app uses [RAWG](https://rawg.io/) as a source of the data and/or images.<br />
 Design based in [NomNom](https://www.behance.net/gallery/11351281/NomNom) by [Marc-Antoine Roy](https://www.behance.net/enfantroy).
 
 ## 📝  License

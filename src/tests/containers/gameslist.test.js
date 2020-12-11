@@ -37,7 +37,7 @@ describe('GamesList', () => {
     expect(screen.getByText('Loading Games')).toBeInTheDocument();
   });
 
-  test('should render the games information', () => {
+  test('should render the games\' information', () => {
     dataStore.games.items = [{
       id: 1,
       name: 'mario',

@@ -18,6 +18,11 @@ const Footer = () => (
             Marc-Antoine Roy
           </a>
         </p>
+        <p className="design-author">
+          This site uses
+          <a href="https://rawg.io/" target="_blank" rel="noreferrer"> RAWG </a>
+          as a source of the data and/or images.
+        </p>
       </div>
       <div className="footer-icons">
         <a href="https://github.com/RossielCS" target="_blank" rel="noreferrer">

@@ -19,7 +19,7 @@ describe('Game', () => {
     },
   };
 
-  test('should display a loading spinner whe fetching a game', () => {
+  test('should display a loading spinner when fetching a game', () => {
     render(
       <Game match={match} />, {
         initialState: {},
